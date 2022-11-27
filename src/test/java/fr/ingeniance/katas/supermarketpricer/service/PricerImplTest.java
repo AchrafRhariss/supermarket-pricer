@@ -39,6 +39,16 @@ public class PricerImplTest {
 		assertEquals(BigDecimal.valueOf(20), pricer.payTheBill(cartItems));
 	}
 	
+	@Test
+	public void given_MoreProductsInCart_When_PayTheBill_Then_TotalPriceIsTheProductsSumPrice() {
+		HashMap<String, List<Product>> cartItems = new HashMap<>();
+		cartItems.put("A", buildProducts("A",BigDecimal.valueOf(20), 1));
+		cartItems.put("B", buildProducts("B",BigDecimal.valueOf(50), 1));
+		cartItems.put("C", buildProducts("C",BigDecimal.valueOf(30), 1));
+		
+		assertEquals(BigDecimal.valueOf(100), pricer.payTheBill(cartItems));
+	}
+	
 	private List<Product> buildProducts(String name, BigDecimal price, int numberOfProducts) {
 		List<Product> productsList = new ArrayList<Product>();
 		for (int i = 0; i < numberOfProducts; i++) {	
