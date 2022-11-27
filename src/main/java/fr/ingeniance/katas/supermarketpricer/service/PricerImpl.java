@@ -15,7 +15,8 @@ public class PricerImpl implements IPricer {
 	public BigDecimal payTheBill(Map<String, List<Product>> cartItems) {
 		BigDecimal totalPrice = BigDecimal.ZERO;
 		for (List<Product> products : cartItems.values()) {
-			totalPrice = totalPrice.add(products.get(0).getPrice().multiply(BigDecimal.valueOf(products.size())));
+			if(!products.isEmpty())
+				totalPrice = totalPrice.add(products.get(0).getPrice().multiply(BigDecimal.valueOf(products.size())));
 		}
 		return totalPrice;
 	}
