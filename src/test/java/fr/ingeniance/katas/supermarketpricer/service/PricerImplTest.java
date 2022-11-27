@@ -77,6 +77,16 @@ public class PricerImplTest {
 		assertEquals(BigDecimal.valueOf(40), pricer.payTheBill(cartItems));
 	}
 	
+	@Test
+	public void given_MultipleOfferOnProductInCart_When_PayTheBill_Then_MultipleOfferPriceIsApplicable() {
+		HashMap<String, List<Product>> cartItems = new HashMap<>();
+		cartItems.put("A", buildProducts("A",BigDecimal.valueOf(20), 9));
+		
+		Mockito.when(offerDao.findByProductName(Mockito.anyString())).thenReturn(new BuyTwoGetOneOfferImpl());
+		
+		assertEquals(BigDecimal.valueOf(120), pricer.payTheBill(cartItems));
+	}
+	
 	private List<Product> buildProducts(String name, BigDecimal price, int numberOfProducts) {
 		List<Product> productsList = new ArrayList<Product>();
 		for (int i = 0; i < numberOfProducts; i++) {	
