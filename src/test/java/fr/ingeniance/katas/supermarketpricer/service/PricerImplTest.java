@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import fr.ingeniance.katas.supermarketpricer.dao.OfferDaoImpl;
 import fr.ingeniance.katas.supermarketpricer.models.BuyTwoGetOneOfferImpl;
+import fr.ingeniance.katas.supermarketpricer.models.NoOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.Product;
 
 @SpringBootTest
@@ -49,6 +50,16 @@ public class PricerImplTest {
 		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1);
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new BuyTwoGetOneOfferImpl());
+		
+		assertEquals(BigDecimal.valueOf(20), pricer.payTheBill(cartItems));
+	}
+	
+	@Test
+	public void given_ProductWithNoOfferInCart_When_PayTheBill_Then_TotalPriceIsTheProductPrice() {
+		HashMap<Product, Integer> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1);
+		
+		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new NoOfferImpl());
 		
 		assertEquals(BigDecimal.valueOf(20), pricer.payTheBill(cartItems));
 	}
