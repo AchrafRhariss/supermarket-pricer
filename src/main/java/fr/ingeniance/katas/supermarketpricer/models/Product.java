@@ -12,20 +12,17 @@ public class Product {
 		this.price = price;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
 	}
+
 	
 }

@@ -1,7 +1,6 @@
 package fr.ingeniance.katas.supermarketpricer.service;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -14,16 +13,16 @@ import fr.ingeniance.katas.supermarketpricer.models.Product;
 
 @Service
 public class PricerImpl implements IPricer {
-	
+
 	@Autowired
 	private IOfferDao offerDao;
 
 	@Override
-	public BigDecimal payTheBill(Map<String, List<Product>> cartItems) {
+	public BigDecimal payTheBill(Map<Product, Integer> cartItems) {
 		BigDecimal totalPrice = BigDecimal.ZERO;
-		for (Entry<String, List<Product>> entry : cartItems.entrySet()) {
-			IOffer productOffer = offerDao.findByProductName(entry.getKey());
-			totalPrice = totalPrice.add(productOffer.calculatePrice(entry.getValue().get(0), entry.getValue().size()));
+		for (Entry<Product, Integer> entry : cartItems.entrySet()) {
+			IOffer productOffer = offerDao.findByProduct(entry.getKey());
+			totalPrice = totalPrice.add(productOffer.calculatePrice(entry.getKey(), entry.getValue()));
 		}
 		return totalPrice;
 	}
