@@ -7,12 +7,12 @@ public class DiscountOfferImpl implements IOffer {
 	private BigDecimal discountRate;
 	
 	public DiscountOfferImpl() {
-		this(BigDecimal.valueOf(0.2));
+		this(0.2);
 	}
 
-	public DiscountOfferImpl(BigDecimal discountRate) {
+	public DiscountOfferImpl(double discountRate) {
 		super();
-		this.discountRate = discountRate;
+		this.discountRate = BigDecimal.valueOf(discountRate);
 	}
 
 	@Override

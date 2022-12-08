@@ -108,4 +108,15 @@ public class PricerImplTest {
 		assertEquals(BigDecimal.valueOf(80.0), pricer.payTheBill(cartItems));
 	}
 	
+	
+	@Test
+	public void given_OneProductInCartWith50PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
+		HashMap<Product, Integer> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(100)), 1);
+		
+		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new DiscountOfferImpl(0.5));
+		
+		assertEquals(BigDecimal.valueOf(50.0), pricer.payTheBill(cartItems));
+	}
+	
 }
