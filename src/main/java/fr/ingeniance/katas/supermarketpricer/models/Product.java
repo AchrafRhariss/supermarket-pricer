@@ -23,6 +23,5 @@ public class Product {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
-
 	
 }

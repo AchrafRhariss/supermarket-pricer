@@ -20,22 +20,29 @@ public class OfferDaoImpl implements IOfferDao {
 
 	private Map<Product, IOffer> pricingRules = new HashMap<>();
 	
-	{
+	public OfferDaoImpl() {
 		//Imitating the database query
 		Product productA = new Product("A", BigDecimal.valueOf(20));
 		pricingRules.put(productA, new BuyTwoGetOneOfferImpl());
 	}
 	
+
+	public Map<Product, IOffer> getPricingRules() {
+		return pricingRules;
+	}
+
+	public void setPricingRules(Map<Product, IOffer> pricingRules) {
+		this.pricingRules = pricingRules;
+	}
+
 	@Override
 	public IOffer findByProduct(Product product) {
-		// TODO Auto-generated method stub
 		return pricingRules.getOrDefault(product, new NoOfferImpl());
 	}
 
 	@Override
 	public List<IOffer> findAllLessThan(LocalDate endDate) {
-		// TODO Auto-generated method stub
-		return new ArrayList<IOffer>(pricingRules.values());
+		return new ArrayList<>(pricingRules.values());
 	}
 
 }

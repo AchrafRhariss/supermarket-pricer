@@ -32,12 +32,12 @@ public class PricerImplTest {
 	private OfferDaoImpl offerDao;
 
 	@BeforeEach
-	public void setUp() {
+	void setUp() {
 		//pricer = new PricerImpl();
 	}
 	
 	@Test
-	public void given_NoProductInCart_When_PayTheBill_Then_TotalPriceIsZero() {
+	void given_NoProductInCart_When_PayTheBill_Then_TotalPriceIsZero() {
 		Map<Product, Integer> cartItems = new HashMap<>();
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new BuyTwoGetOneOfferImpl());
@@ -46,7 +46,7 @@ public class PricerImplTest {
 	}
 	
 	@Test
-	public void given_OneProductInCart_When_PayTheBill_Then_TotalPriceIsTheProductPrice() {
+	void given_OneProductInCart_When_PayTheBill_Then_TotalPriceIsTheProductPrice() {
 		HashMap<Product, Integer> cartItems = new HashMap<>();
 		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1);
 		
@@ -56,7 +56,7 @@ public class PricerImplTest {
 	}
 	
 	@Test
-	public void given_ProductWithNoOfferInCart_When_PayTheBill_Then_TotalPriceIsTheProductPrice() {
+	void given_ProductWithNoOfferInCart_When_PayTheBill_Then_TotalPriceIsTheProductPrice() {
 		HashMap<Product, Integer> cartItems = new HashMap<>();
 		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1);
 		
@@ -66,7 +66,7 @@ public class PricerImplTest {
 	}
 	
 	@Test
-	public void given_MoreProductsInCart_When_PayTheBill_Then_TotalPriceIsTheProductsSumPrice() {
+	void given_MoreProductsInCart_When_PayTheBill_Then_TotalPriceIsTheProductsSumPrice() {
 		HashMap<Product, Integer> cartItems = new HashMap<>();
 		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1);
 		cartItems.put(new Product("B",BigDecimal.valueOf(50)), 1);
@@ -78,7 +78,7 @@ public class PricerImplTest {
 	}
 	
 	@Test
-	public void given_OfferOnProductInCart_When_PayTheBill_Then_OfferPriceIsApplicable() {
+	void given_OfferOnProductInCart_When_PayTheBill_Then_OfferPriceIsApplicable() {
 		HashMap<Product, Integer> cartItems = new HashMap<>();
 		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 3);
 		
@@ -88,7 +88,7 @@ public class PricerImplTest {
 	}
 	
 	@Test
-	public void given_MultipleOfferOnProductInCart_When_PayTheBill_Then_MultipleOfferPriceIsApplicable() {
+	void given_MultipleOfferOnProductInCart_When_PayTheBill_Then_MultipleOfferPriceIsApplicable() {
 		HashMap<Product, Integer> cartItems = new HashMap<>();
 		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 9);
 		
@@ -99,7 +99,7 @@ public class PricerImplTest {
 	
 	
 	@Test
-	public void given_OneProductInCartWith20PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
+	void given_OneProductInCartWith20PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
 		HashMap<Product, Integer> cartItems = new HashMap<>();
 		cartItems.put(new Product("A",BigDecimal.valueOf(100)), 1);
 		
@@ -110,7 +110,7 @@ public class PricerImplTest {
 	
 	
 	@Test
-	public void given_OneProductInCartWith50PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
+	void given_OneProductInCartWith50PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
 		HashMap<Product, Integer> cartItems = new HashMap<>();
 		cartItems.put(new Product("A",BigDecimal.valueOf(100)), 1);
 		
@@ -121,7 +121,7 @@ public class PricerImplTest {
 	
 	
 	@Test
-	public void given_MultipleProductsInCartWith20PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
+	void given_MultipleProductsInCartWith20PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
 		HashMap<Product, Integer> cartItems = new HashMap<>();
 		cartItems.put(new Product("A",BigDecimal.valueOf(10)), 2);
 		cartItems.put(new Product("B",BigDecimal.valueOf(20)), 3);
