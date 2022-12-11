@@ -1,6 +1,7 @@
 package fr.ingeniance.katas.supermarketpricer.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import fr.ingeniance.katas.supermarketpricer.models.BuyTwoGetOneOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.DiscountOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.NoOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.Product;
+import fr.ingeniance.katas.supermarketpricer.models.Unit;
 
 @SpringBootTest
 public class PricerImplTest {
@@ -132,4 +134,16 @@ public class PricerImplTest {
 		assertEquals(new BigDecimal("80.00"), pricer.payTheBill(cartItems));
 	}
 	
+	@Test
+	void given_WeightTableProductWithIcompatibleOfferInCart_When_PayTheBill_Then_ExceptionIsRaised() {
+		Map<Product, Double> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(10),Unit.POUND), 3.0);
+		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new BuyTwoGetOneOfferImpl());
+		
+		Exception exception = assertThrows(IllegalStateException.class, () -> pricer.payTheBill(cartItems));
+		String expectedMessage = "Offer isn't applicable for weightable products";
+		String actualMessage = exception.getMessage();
+		
+		assertEquals(expectedMessage, actualMessage);
+	}
 }
