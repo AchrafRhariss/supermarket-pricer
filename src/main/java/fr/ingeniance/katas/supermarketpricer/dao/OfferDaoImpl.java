@@ -13,6 +13,7 @@ import fr.ingeniance.katas.supermarketpricer.models.BuyTwoGetOneOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.IOffer;
 import fr.ingeniance.katas.supermarketpricer.models.NoOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.Product;
+import fr.ingeniance.katas.supermarketpricer.models.Unit;
 
 
 @Repository
@@ -22,7 +23,7 @@ public class OfferDaoImpl implements IOfferDao {
 	
 	public OfferDaoImpl() {
 		//Imitating the database query
-		Product productA = new Product("A", BigDecimal.valueOf(20));
+		Product productA = new Product("A", BigDecimal.valueOf(20), Unit.PIECE);
 		pricingRules.put(productA, new BuyTwoGetOneOfferImpl());
 	}
 	

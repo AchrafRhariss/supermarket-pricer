@@ -17,9 +17,19 @@ public class DiscountOfferImpl implements IOffer {
 	}
 
 	@Override
-	public BigDecimal calculatePrice(Product product, double quantity) {
+	public BigDecimal calculatePrice(Product product, Quantity quantity) {
 		
-		return product.getPrice().multiply(BigDecimal.valueOf(quantity))
+		if(quantity.getUnit() == Unit.PIECE && product.getUnit() != Unit.PIECE) {
+			throw new IllegalStateException("Quantity unit mismatch product unit");
+		}
+		
+		BigDecimal convertedQuantity = BigDecimal.valueOf(quantity.getValue());
+		
+		if(quantity.getUnit() != product.getUnit() && quantity.getUnit() != Unit.PIECE && product.getUnit() != Unit.PIECE) {
+			convertedQuantity = quantity.getUnit().convertTo(product.getUnit(), BigDecimal.valueOf(quantity.getValue()));
+		}
+		
+		return product.getPrice().multiply(convertedQuantity)
 					.multiply(BigDecimal.ONE.subtract(discountRate))
 					.setScale(2, RoundingMode.HALF_UP);
 	}

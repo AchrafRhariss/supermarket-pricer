@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import fr.ingeniance.katas.supermarketpricer.dao.IOfferDao;
 import fr.ingeniance.katas.supermarketpricer.models.IOffer;
 import fr.ingeniance.katas.supermarketpricer.models.Product;
+import fr.ingeniance.katas.supermarketpricer.models.Quantity;
 
 @Service
 public class PricerImpl implements IPricer {
@@ -18,9 +19,9 @@ public class PricerImpl implements IPricer {
 	private IOfferDao offerDao;
 
 	@Override
-	public BigDecimal payTheBill(Map<Product, Double> cartItems) {
+	public BigDecimal payTheBill(Map<Product, Quantity> cartItems) {
 		BigDecimal totalPrice = BigDecimal.ZERO;
-		for (Entry<Product, Double> entry : cartItems.entrySet()) {
+		for (Entry<Product, Quantity> entry : cartItems.entrySet()) {
 			IOffer productOffer = offerDao.findByProduct(entry.getKey());
 			totalPrice = totalPrice.add(productOffer.calculatePrice(entry.getKey(), entry.getValue()));
 		}

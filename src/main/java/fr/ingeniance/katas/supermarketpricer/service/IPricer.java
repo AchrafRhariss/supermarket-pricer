@@ -4,8 +4,9 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 import fr.ingeniance.katas.supermarketpricer.models.Product;
+import fr.ingeniance.katas.supermarketpricer.models.Quantity;
 
 public interface IPricer {
 
-	public BigDecimal payTheBill(Map<Product, Double> cartItems);
+	public BigDecimal payTheBill(Map<Product, Quantity> cartItems);
 }
