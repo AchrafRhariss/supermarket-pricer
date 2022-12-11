@@ -7,5 +7,5 @@ import fr.ingeniance.katas.supermarketpricer.models.Product;
 
 public interface IPricer {
 
-	public BigDecimal payTheBill(Map<Product, Integer> cartItems);
+	public BigDecimal payTheBill(Map<Product, Double> cartItems);
 }

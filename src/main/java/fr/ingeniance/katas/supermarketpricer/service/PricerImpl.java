@@ -18,9 +18,9 @@ public class PricerImpl implements IPricer {
 	private IOfferDao offerDao;
 
 	@Override
-	public BigDecimal payTheBill(Map<Product, Integer> cartItems) {
+	public BigDecimal payTheBill(Map<Product, Double> cartItems) {
 		BigDecimal totalPrice = BigDecimal.ZERO;
-		for (Entry<Product, Integer> entry : cartItems.entrySet()) {
+		for (Entry<Product, Double> entry : cartItems.entrySet()) {
 			IOffer productOffer = offerDao.findByProduct(entry.getKey());
 			totalPrice = totalPrice.add(productOffer.calculatePrice(entry.getKey(), entry.getValue()));
 		}

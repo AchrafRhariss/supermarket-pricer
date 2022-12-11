@@ -38,7 +38,7 @@ public class PricerImplTest {
 	
 	@Test
 	void given_NoProductInCart_When_PayTheBill_Then_TotalPriceIsZero() {
-		Map<Product, Integer> cartItems = new HashMap<>();
+		Map<Product, Double> cartItems = new HashMap<>();
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new BuyTwoGetOneOfferImpl());
 		
@@ -47,89 +47,89 @@ public class PricerImplTest {
 	
 	@Test
 	void given_OneProductInCart_When_PayTheBill_Then_TotalPriceIsTheProductPrice() {
-		HashMap<Product, Integer> cartItems = new HashMap<>();
-		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1);
+		HashMap<Product, Double> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1.0);
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new BuyTwoGetOneOfferImpl());
 		
-		assertEquals(BigDecimal.valueOf(20), pricer.payTheBill(cartItems));
+		assertEquals(new BigDecimal("20.00"), pricer.payTheBill(cartItems));
 	}
 	
 	@Test
 	void given_ProductWithNoOfferInCart_When_PayTheBill_Then_TotalPriceIsTheProductPrice() {
-		HashMap<Product, Integer> cartItems = new HashMap<>();
-		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1);
+		HashMap<Product, Double> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1.0);
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new NoOfferImpl());
 		
-		assertEquals(BigDecimal.valueOf(20), pricer.payTheBill(cartItems));
+		assertEquals(new BigDecimal("20.00"), pricer.payTheBill(cartItems));
 	}
 	
 	@Test
 	void given_MoreProductsInCart_When_PayTheBill_Then_TotalPriceIsTheProductsSumPrice() {
-		HashMap<Product, Integer> cartItems = new HashMap<>();
-		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1);
-		cartItems.put(new Product("B",BigDecimal.valueOf(50)), 1);
-		cartItems.put(new Product("C",BigDecimal.valueOf(30)), 1);
+		HashMap<Product, Double> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 1.0);
+		cartItems.put(new Product("B",BigDecimal.valueOf(50)), 1.0);
+		cartItems.put(new Product("C",BigDecimal.valueOf(30)), 1.0);
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new BuyTwoGetOneOfferImpl());
 		
-		assertEquals(BigDecimal.valueOf(100), pricer.payTheBill(cartItems));
+		assertEquals(new BigDecimal("100.00"), pricer.payTheBill(cartItems));
 	}
 	
 	@Test
 	void given_OfferOnProductInCart_When_PayTheBill_Then_OfferPriceIsApplicable() {
-		HashMap<Product, Integer> cartItems = new HashMap<>();
-		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 3);
+		HashMap<Product, Double> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 3.0);
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new BuyTwoGetOneOfferImpl());
 		
-		assertEquals(BigDecimal.valueOf(40), pricer.payTheBill(cartItems));
+		assertEquals(new BigDecimal("40.00"), pricer.payTheBill(cartItems));
 	}
 	
 	@Test
 	void given_MultipleOfferOnProductInCart_When_PayTheBill_Then_MultipleOfferPriceIsApplicable() {
-		HashMap<Product, Integer> cartItems = new HashMap<>();
-		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 9);
+		HashMap<Product, Double> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(20)), 9.0);
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new BuyTwoGetOneOfferImpl());
 		
-		assertEquals(BigDecimal.valueOf(120), pricer.payTheBill(cartItems));
+		assertEquals(new BigDecimal("120.00"), pricer.payTheBill(cartItems));
 	}
 	
 	
 	@Test
 	void given_OneProductInCartWith20PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
-		HashMap<Product, Integer> cartItems = new HashMap<>();
-		cartItems.put(new Product("A",BigDecimal.valueOf(100)), 1);
+		HashMap<Product, Double> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(100)), 1.0);
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new DiscountOfferImpl());
 		
-		assertEquals(BigDecimal.valueOf(80.0), pricer.payTheBill(cartItems));
+		assertEquals(new BigDecimal("80.00"), pricer.payTheBill(cartItems));
 	}
 	
 	
 	@Test
 	void given_OneProductInCartWith50PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
-		HashMap<Product, Integer> cartItems = new HashMap<>();
-		cartItems.put(new Product("A",BigDecimal.valueOf(100)), 1);
+		HashMap<Product, Double> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(100)), 1.0);
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new DiscountOfferImpl(0.5));
 		
-		assertEquals(BigDecimal.valueOf(50.0), pricer.payTheBill(cartItems));
+		assertEquals(new BigDecimal("50.00"), pricer.payTheBill(cartItems));
 	}
 	
 	
 	@Test
 	void given_MultipleProductsInCartWith20PercentDiscountOffer_When_PayTheBill_Then_TotalPriceIsTheDiscountPrice() {
-		HashMap<Product, Integer> cartItems = new HashMap<>();
-		cartItems.put(new Product("A",BigDecimal.valueOf(10)), 2);
-		cartItems.put(new Product("B",BigDecimal.valueOf(20)), 3);
-		cartItems.put(new Product("C",BigDecimal.valueOf(10)), 2);
+		HashMap<Product, Double> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(10)), 2.0);
+		cartItems.put(new Product("B",BigDecimal.valueOf(20)), 3.0);
+		cartItems.put(new Product("C",BigDecimal.valueOf(10)), 2.0);
 		
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new DiscountOfferImpl(0.2));
 		
-		assertEquals(BigDecimal.valueOf(80.0), pricer.payTheBill(cartItems));
+		assertEquals(new BigDecimal("80.00"), pricer.payTheBill(cartItems));
 	}
 	
 }

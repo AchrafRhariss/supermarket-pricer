@@ -6,14 +6,28 @@ public class Product {
 	
 	private String name;
 	private BigDecimal price;
-
-	public Product(String name, BigDecimal price) {
+	private Unit unit;
+	
+	public Product(String name, BigDecimal price, Unit unit) {
 		this.name = name;
 		this.price = price;
+		this.unit = unit;
+	}
+	
+	public Product(String name, BigDecimal price) {
+		this(name, price, Unit.PIECE);
 	}
 
 	public BigDecimal getPrice() {
 		return price;
+	}
+	
+	public Unit getUnit() {
+		return unit;
+	}
+
+	public void setUnit(Unit unit) {
+		this.unit = unit;
 	}
 
 	@Override
