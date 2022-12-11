@@ -21,6 +21,6 @@ public enum Unit {
 		if(this == Unit.PIECE) {
 			throw new IllegalArgumentException("Not supported conversion");
 		}
-		return BigDecimal.ONE.divide(this.factor).multiply(to.factor);
+		return BigDecimal.ONE.divide(this.factor).multiply(to.factor).multiply(value);
 	}
 }

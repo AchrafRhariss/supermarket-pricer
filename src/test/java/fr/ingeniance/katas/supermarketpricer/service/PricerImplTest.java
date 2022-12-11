@@ -158,4 +158,14 @@ public class PricerImplTest {
 		assertEquals(new BigDecimal("20.00"), pricer.payTheBill(cartItems));
 	}
 	
+	@Test
+	void given_OrderedQuantityUnitDifferentThanProductUnitInCart_When_PayTheBill_Then_TotalPriceIsUnitConvertedQuantityPrice() {
+		HashMap<Product, Quantity> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(1000),Unit.KILO), Quantity.of(Unit.GRAM, 500.0));
+		
+		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new NoOfferImpl());
+		
+		assertEquals(new BigDecimal("500.00"), pricer.payTheBill(cartItems));
+	}
+	
 }
