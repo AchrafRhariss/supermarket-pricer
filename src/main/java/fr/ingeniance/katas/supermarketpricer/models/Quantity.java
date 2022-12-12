@@ -1,5 +1,12 @@
 package fr.ingeniance.katas.supermarketpricer.models;
 
+/**
+ * <p>
+ * 	This class represents the quantity for weightable product for example : 3Kg, 5Pounds, 10g...
+ * </p>
+ * @author arhariss
+ * 
+ */
 public class Quantity {
 
 	private Unit unit;

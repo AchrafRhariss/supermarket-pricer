@@ -1,14 +1,14 @@
-/**
- * 
- */
 package fr.ingeniance.katas.supermarketpricer.models;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * @author asus
- *
+ * <p>
+ * 	Implementation for Offer specification for weightable products, using this offer you can buy 2Kilos of a product only with 3$.
+ * </p>
+ * @author arhariss
+ * 
  */
 public class TwoKilosForThreeDollarsOfferImpl implements IOffer {
 

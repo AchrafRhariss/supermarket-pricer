@@ -12,6 +12,14 @@ import fr.ingeniance.katas.supermarketpricer.models.IOffer;
 import fr.ingeniance.katas.supermarketpricer.models.Product;
 import fr.ingeniance.katas.supermarketpricer.models.Quantity;
 
+/**
+ * <p>
+ * 	Implementation for Pricer specification.
+ * </p>
+ * @author arhariss
+ * 
+ */
+
 @Service
 public class PricerImpl implements IPricer {
 

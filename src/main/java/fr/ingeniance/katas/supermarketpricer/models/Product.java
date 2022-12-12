@@ -2,6 +2,13 @@ package fr.ingeniance.katas.supermarketpricer.models;
 
 import java.math.BigDecimal;
 
+/**
+ * <p>
+ * 	Product entity defined with 3 attributes : name, price and {@link Unit} .
+ * </p>
+ * @author arhariss
+ * 
+ */
 public class Product {
 	
 	private String name;

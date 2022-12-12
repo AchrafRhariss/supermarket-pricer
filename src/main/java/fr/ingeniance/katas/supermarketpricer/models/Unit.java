@@ -3,6 +3,13 @@ package fr.ingeniance.katas.supermarketpricer.models;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * <p>
+ * 	This enumeration represents the different units the products can have in the application.
+ * </p>
+ * @author arhariss
+ * 
+ */
 public enum Unit {
 	PIECE(BigDecimal.ZERO),
 	GRAM(BigDecimal.ONE),

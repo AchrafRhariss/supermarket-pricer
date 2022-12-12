@@ -15,6 +15,13 @@ import fr.ingeniance.katas.supermarketpricer.models.NoOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.Product;
 import fr.ingeniance.katas.supermarketpricer.models.Unit;
 
+/**
+ * <p>
+ * 	1st implementation for Offers repository, that imitates the database queries.
+ * </p>
+ * @author arhariss
+ * 
+ */
 
 @Repository
 public class OfferDaoImpl implements IOfferDao {

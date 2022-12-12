@@ -3,6 +3,13 @@ package fr.ingeniance.katas.supermarketpricer.models;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * <p>
+ * 	Implementation for Offer specification, this is the default one, offer price is the product price.
+ * </p>
+ * @author arhariss
+ * 
+ */
 public class NoOfferImpl implements IOffer {
 
 	@Override

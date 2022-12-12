@@ -3,6 +3,14 @@ package fr.ingeniance.katas.supermarketpricer.models;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+
+/**
+ * <p>
+ * 	Implementation for Offer specification, using this offer you can buy products with discount.
+ * </p>
+ * @author arhariss
+ * 
+ */
 public class DiscountOfferImpl implements IOffer {
 
 	private BigDecimal discountRate;

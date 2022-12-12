@@ -3,6 +3,14 @@ package fr.ingeniance.katas.supermarketpricer.models;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+
+/**
+ * <p>
+ * 	Implementation for Offer specification, using this offer you can buy 3 products with price of two.
+ * </p>
+ * @author arhariss
+ * 
+ */
 public class BuyTwoGetOneOfferImpl implements IOffer {
 
 	@Override
