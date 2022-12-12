@@ -189,4 +189,17 @@ public class PricerImplTest {
 		assertEquals(new BigDecimal("3.00"), pricer.payTheBill(cartItems));
 	}
 	
+	@Test
+	void given_UnitProductWithIncompatibleOfferInCart_When_PayTheBill_Then_ExceptionIsRaised() {
+		Map<Product, Quantity> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(10),Unit.PIECE), Quantity.of(Unit.KILO, 3.0));
+		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new TwoKilosForThreeDollarsOfferImpl());
+		
+		Exception exception = assertThrows(IllegalStateException.class, () -> pricer.payTheBill(cartItems));
+		String expectedMessage = "Offer isn't applicable for unit products";
+		String actualMessage = exception.getMessage();
+		
+		assertEquals(expectedMessage, actualMessage);
+	}
+	
 }
