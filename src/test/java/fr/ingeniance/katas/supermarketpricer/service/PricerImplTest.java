@@ -179,4 +179,14 @@ public class PricerImplTest {
 		assertEquals(new BigDecimal("3.00"), pricer.payTheBill(cartItems));
 	}
 	
+	@Test
+	void given_PoundQuantitySatisfied2KgFor3OfferProductInCart_When_PayTheBill_Then_TotalPriceIsOfferPrice() {
+		HashMap<Product, Quantity> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(2),Unit.KILO), Quantity.of(Unit.POUND, 4.4));
+		
+		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new TwoKilosForThreeDollarsOfferImpl());
+		
+		assertEquals(new BigDecimal("3.00"), pricer.payTheBill(cartItems));
+	}
+	
 }
