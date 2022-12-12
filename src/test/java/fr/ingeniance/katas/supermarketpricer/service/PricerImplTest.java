@@ -22,6 +22,7 @@ import fr.ingeniance.katas.supermarketpricer.models.DiscountOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.NoOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.Product;
 import fr.ingeniance.katas.supermarketpricer.models.Quantity;
+import fr.ingeniance.katas.supermarketpricer.models.TwoKilosForThreeDollarsOfferImpl;
 import fr.ingeniance.katas.supermarketpricer.models.Unit;
 
 @SpringBootTest
@@ -166,6 +167,16 @@ public class PricerImplTest {
 		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new NoOfferImpl());
 		
 		assertEquals(new BigDecimal("500.00"), pricer.payTheBill(cartItems));
+	}
+	
+	@Test
+	void given_2KiloFor3OfferProductInCart_When_PayTheBill_Then_TotalPriceIsOfferPrice() {
+		HashMap<Product, Quantity> cartItems = new HashMap<>();
+		cartItems.put(new Product("A",BigDecimal.valueOf(2),Unit.KILO), Quantity.of(Unit.KILO, 2.0));
+		
+		Mockito.when(offerDao.findByProduct(ArgumentMatchers.isA(Product.class))).thenReturn(new TwoKilosForThreeDollarsOfferImpl());
+		
+		assertEquals(new BigDecimal("3.00"), pricer.payTheBill(cartItems));
 	}
 	
 }
