@@ -26,7 +26,7 @@ import fr.ingeniance.katas.supermarketpricer.models.TwoKilosForThreeDollarsOffer
 import fr.ingeniance.katas.supermarketpricer.models.Unit;
 
 @SpringBootTest
-public class PricerImplTest {
+class PricerImplTest {
 
 	@Spy
 	@InjectMocks
